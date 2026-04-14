@@ -1,4 +1,4 @@
-# Proyecto Águilas Cazadoras - Presentación del Equipo
+# Proyecto Águilas Cazadoras
 
 
 # Bob-omb
