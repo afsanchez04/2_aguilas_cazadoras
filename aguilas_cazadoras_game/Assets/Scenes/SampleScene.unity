@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 155850346}
   - component: {fileID: 155850345}
   - component: {fileID: 155850344}
+  - component: {fileID: 155850348}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -483,6 +484,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &155850348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155850343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c08ebe2b35904a87dac98017153dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCThrow
+  bomb: {fileID: 0}
+  targets: []
+  delay: 2
 --- !u!1001 &261597016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,8 +1057,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 38972d9a807375f4fbdbf2e076aa183f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 719882846}
   m_SourcePrefab: {fileID: 100100000, guid: 38972d9a807375f4fbdbf2e076aa183f, type: 3}
+--- !u!1 &719882845 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 38972d9a807375f4fbdbf2e076aa183f, type: 3}
+  m_PrefabInstance: {fileID: 719882844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &719882846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719882845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c96ee33fdf80fe40b06539cc0724bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bomb
+  timer: 15
+  currentHolder: {fileID: 0}
 --- !u!1001 &759489517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1242,6 +1280,7 @@ GameObject:
   - component: {fileID: 911241900}
   - component: {fileID: 911241899}
   - component: {fileID: 911241898}
+  - component: {fileID: 911241902}
   m_Layer: 0
   m_Name: Principal player
   m_TagString: Untagged
@@ -1342,6 +1381,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911241902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911241897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c08ebe2b35904a87dac98017153dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCThrow
+  bomb: {fileID: 0}
+  targets: []
+  delay: 2
 --- !u!1 &932850341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1408,7 @@ GameObject:
   - component: {fileID: 932850344}
   - component: {fileID: 932850343}
   - component: {fileID: 932850342}
+  - component: {fileID: 932850346}
   m_Layer: 0
   m_Name: player 3
   m_TagString: Untagged
@@ -1454,6 +1509,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &932850346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932850341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c08ebe2b35904a87dac98017153dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCThrow
+  bomb: {fileID: 0}
+  targets: []
+  delay: 2
 --- !u!1001 &958075450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1636,6 +1706,7 @@ GameObject:
   - component: {fileID: 1079144825}
   - component: {fileID: 1079144824}
   - component: {fileID: 1079144823}
+  - component: {fileID: 1079144827}
   m_Layer: 0
   m_Name: player 2
   m_TagString: Untagged
@@ -1736,6 +1807,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079144827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079144822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c08ebe2b35904a87dac98017153dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCThrow
+  bomb: {fileID: 0}
+  targets: []
+  delay: 2
 --- !u!1001 &1108843206
 PrefabInstance:
   m_ObjectHideFlags: 0
