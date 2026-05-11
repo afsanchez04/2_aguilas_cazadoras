@@ -1,9 +1,16 @@
 using UnityEngine;
+using TMPro;
 
 public class Bomb : MonoBehaviour
 {
-    public float timer = 15f; // tiempo de la bomba
-    public GameObject currentHolder; // quien tiene la bomba
+    // tiempo de la bomba
+    public float timer = 15f;
+
+    // jugador que tiene la bomba
+    public GameObject currentHolder;
+
+    // texto del contador en pantalla
+    public TextMeshProUGUI timerText;
 
     void Update()
     {
@@ -13,17 +20,20 @@ public class Bomb : MonoBehaviour
             transform.position = currentHolder.transform.position + Vector3.up * 2f;
         }
 
-        // contar tiempo
+        // disminuir tiempo
         timer -= Time.deltaTime;
 
-        // explotar
+        // actualizar texto en pantalla
+        timerText.text = "Time: " + Mathf.Ceil(timer).ToString();
+
+        // explotar cuando llegue a 0
         if (timer <= 0)
         {
             Explode();
         }
     }
 
-    // pasar la bomba a otro jugador
+    // pasar bomba a otro jugador
     public void PassBomb(GameObject newHolder)
     {
         currentHolder = newHolder;
@@ -31,7 +41,7 @@ public class Bomb : MonoBehaviour
 
     void Explode()
     {
-        Debug.Log("BOOM! perdiÃ³: " + currentHolder.name);
+        Debug.Log("BOOM! perdió: " + currentHolder.name);
         Destroy(gameObject);
     }
 }
