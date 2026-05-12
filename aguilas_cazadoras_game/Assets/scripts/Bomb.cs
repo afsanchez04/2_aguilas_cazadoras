@@ -116,8 +116,13 @@ public class Bomb : MonoBehaviour
         {
             timeoutMessage.SetActive(true);
         }
+        // ocultar modelo visual de la bomba
+        {
+            transform.localScale = Vector3.zero;
+        }
+        
 
         // destruir bomba
-        Destroy(gameObject);
+        Destroy(gameObject, 2f);
     }
 }
