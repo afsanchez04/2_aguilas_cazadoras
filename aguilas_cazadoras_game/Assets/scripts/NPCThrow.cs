@@ -10,10 +10,10 @@ public class NPCThrow : MonoBehaviour
 
     void Update()
     {
-        // verificar si bomba existe
+        // check if a pump exists
         if (bomb == null) return;
 
-        // solo si este NPC tiene la bomba
+        // only if this NPC has the bomb
         if (bomb.currentHolder != gameObject) return;
 
         timer += Time.deltaTime;

@@ -10,10 +10,10 @@ public class PlayerThrow : MonoBehaviour
 
     void Update()
     {
-        // verificar si la bomba existe
+        // Check if the pump exists
         if (bomb == null) return;
 
-        // solo si el jugador tiene la bomba
+        // only if the player has the bomb
         if (bomb.currentHolder != gameObject) return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

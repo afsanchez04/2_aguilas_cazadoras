@@ -28,7 +28,7 @@ public class Bomb : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        // ocultar mensaje al iniciar
+        // Hide message when starting the game
         if (timeoutMessage != null)
         {
             timeoutMessage.SetActive(false);
@@ -37,7 +37,7 @@ public class Bomb : MonoBehaviour
 
     void Update()
     {
-        // detener actualización después de explotar
+        // Stop update after exploding
         if (exploded) return;
 
         // seguir al jugador
@@ -47,82 +47,82 @@ public class Bomb : MonoBehaviour
                 currentHolder.transform.position + Vector3.up * 2f;
         }
 
-        // disminuir tiempo
+        // reduce time
         timer -= Time.deltaTime;
 
-        // actualizar contador
+        // update counter
         if (timerText != null)
         {
             timerText.text =
                 "Time: " + Mathf.Ceil(timer).ToString();
         }
 
-        // explotar
+        // burst
         if (timer <= 0)
         {
             Explode();
         }
     }
 
-    // pasar bomba
+    // pass bomb
     public void PassBomb(GameObject newHolder)
     {
         currentHolder = newHolder;
 
-        // sonido lanzamiento
+        // sound launch
         if (audioSource != null && throwSound != null)
         {
             audioSource.PlayOneShot(throwSound);
         }
     }
 
-    // explosión
+    // burst
     void Explode()
     {
         exploded = true;
 
         Debug.Log("BOOM! perdió: " + currentHolder.name);
 
-        // explosión visual
+        // visual burst
         if (explosionEffect != null)
         {
-            // separar partículas
+            // separate particles
             explosionEffect.transform.parent = null;
 
-            // mover explosión
+            // move explosion
             explosionEffect.transform.position = transform.position;
 
-            // reproducir efecto
+            // reproduce effect
             explosionEffect.Play();
 
-            // destruir partículas después
+            // destroy particles
             Destroy(explosionEffect.gameObject, 3f);
         }
 
-        // sonido explosión
+        // sound of explosion
         if (audioSource != null && explosionSound != null)
         {
             audioSource.PlayOneShot(explosionSound);
         }
 
-        // ocultar contador
+        // hide counter
         if (timerText != null)
         {
             timerText.gameObject.SetActive(false);
         }
 
-        // mostrar GAME OVER
+        // show GAME OVER
         if (timeoutMessage != null)
         {
             timeoutMessage.SetActive(true);
         }
-        // ocultar modelo visual de la bomba
+        // hide visual model of the pump
         {
             transform.localScale = Vector3.zero;
         }
         
 
-        // destruir bomba
+        // destroy bomb
         Destroy(gameObject, 2f);
     }
 }
