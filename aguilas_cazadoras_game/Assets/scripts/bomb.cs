@@ -64,21 +64,24 @@ public class Bomb : MonoBehaviour
     }
 
     void Explode()
+{
+    exploded = true;
+
+    Debug.Log("BOOM! perdió: " + currentHolder.name);
+
+    // sonido explosión
+    if(audioSource != null && explosionSound != null)
     {
-        exploded = true;
-
-        Debug.Log("BOOM! perdió: " + currentHolder.name);
-
-        // sonido explosión
         audioSource.PlayOneShot(explosionSound);
-
-        // mostrar mensaje
-        timeoutMessage.SetActive(true);
-
-        // cambiar texto del contador
-        timerText.text = "TIME OUT";
-
-        // destruir después de 2 segundos
-        Destroy(gameObject, 2f);
     }
+
+    // ocultar contador
+    timerText.gameObject.SetActive(false);
+
+    // mostrar TIME OUT
+    timeoutMessage.SetActive(true);
+
+    // destruir bomba después de 2 segundos
+    Destroy(gameObject, 2f);
+}
 }
