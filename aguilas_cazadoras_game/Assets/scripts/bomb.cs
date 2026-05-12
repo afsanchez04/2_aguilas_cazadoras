@@ -3,45 +3,82 @@ using TMPro;
 
 public class Bomb : MonoBehaviour
 {
-    // tiempo de la bomba
+    [Header("Timer")]
     public float timer = 15f;
 
-    // jugador que tiene la bomba
+    [Header("Current Holder")]
     public GameObject currentHolder;
 
-    // texto del contador en pantalla
+    [Header("UI")]
     public TextMeshProUGUI timerText;
+    public GameObject timeoutMessage;
+
+    [Header("Sounds")]
+    public AudioClip throwSound;
+    public AudioClip explosionSound;
+
+    private AudioSource audioSource;
+
+    private bool exploded = false;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        // ocultar mensaje al iniciar
+        timeoutMessage.SetActive(false);
+    }
 
     void Update()
     {
-        // seguir al jugador que tiene la bomba
+        if (exploded) return;
+
+        // seguir al jugador
         if (currentHolder != null)
         {
-            transform.position = currentHolder.transform.position + Vector3.up * 2f;
+            transform.position =
+                currentHolder.transform.position + Vector3.up * 2f;
         }
 
         // disminuir tiempo
         timer -= Time.deltaTime;
 
-        // actualizar texto en pantalla
-        timerText.text = "Time: " + Mathf.Ceil(timer).ToString();
+        // actualizar UI
+        timerText.text =
+            "Time: " + Mathf.Ceil(timer).ToString();
 
-        // explotar cuando llegue a 0
+        // explotar
         if (timer <= 0)
         {
             Explode();
         }
     }
 
-    // pasar bomba a otro jugador
+    // pasar bomba
     public void PassBomb(GameObject newHolder)
     {
         currentHolder = newHolder;
+
+        // reproducir sonido lanzamiento
+        audioSource.PlayOneShot(throwSound);
     }
 
     void Explode()
     {
-        Debug.Log("BOOM! perdi�: " + currentHolder.name);
-        Destroy(gameObject);
+        exploded = true;
+
+        Debug.Log("BOOM! perdió: " + currentHolder.name);
+
+        // sonido explosión
+        audioSource.PlayOneShot(explosionSound);
+
+        // mostrar mensaje
+        timeoutMessage.SetActive(true);
+
+        // cambiar texto del contador
+        timerText.text = "TIME OUT";
+
+        // destruir después de 2 segundos
+        Destroy(gameObject, 2f);
     }
 }

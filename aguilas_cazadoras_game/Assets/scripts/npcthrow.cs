@@ -10,6 +10,9 @@ public class NPCThrow : MonoBehaviour
 
     void Update()
     {
+        // verificar si bomba existe
+        if (bomb == null) return;
+
         // solo si este NPC tiene la bomba
         if (bomb.currentHolder != gameObject) return;
 
@@ -20,7 +23,11 @@ public class NPCThrow : MonoBehaviour
             timer = 0;
 
             int random = Random.Range(0, targets.Length);
-            bomb.PassBomb(targets[random]);
+
+            if (targets[random] != gameObject)
+            {
+                bomb.PassBomb(targets[random]);
+            }
         }
     }
 }

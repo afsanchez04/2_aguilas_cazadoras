@@ -10,6 +10,9 @@ public class PlayerThrow : MonoBehaviour
 
     void Update()
     {
+        // verificar si la bomba existe
+        if (bomb == null) return;
+
         // solo si el jugador tiene la bomba
         if (bomb.currentHolder != gameObject) return;
 
