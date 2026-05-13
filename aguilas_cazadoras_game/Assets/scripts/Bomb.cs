@@ -3,45 +3,126 @@ using TMPro;
 
 public class Bomb : MonoBehaviour
 {
-    // tiempo de la bomba
+    [Header("Timer")]
     public float timer = 15f;
 
-    // jugador que tiene la bomba
+    [Header("Current Holder")]
     public GameObject currentHolder;
 
-    // texto del contador en pantalla
+    [Header("UI")]
     public TextMeshProUGUI timerText;
+    public GameObject timeoutMessage;
+
+    [Header("Explosion")]
+    public ParticleSystem explosionEffect;
+
+    [Header("Sounds")]
+    public AudioClip throwSound;
+    public AudioClip explosionSound;
+
+    private AudioSource audioSource;
+
+    private bool exploded = false;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        // Hide message when starting the game
+        if (timeoutMessage != null)
+        {
+            timeoutMessage.SetActive(false);
+        }
+    }
 
     void Update()
     {
-        // seguir al jugador que tiene la bomba
+        // Stop update after exploding
+        if (exploded) return;
+
+        // seguir al jugador
         if (currentHolder != null)
         {
-            transform.position = currentHolder.transform.position + Vector3.up * 2f;
+            transform.position =
+                currentHolder.transform.position + Vector3.up * 2f;
         }
 
-        // disminuir tiempo
+        // reduce time
         timer -= Time.deltaTime;
 
-        // actualizar texto en pantalla
-        timerText.text = "Time: " + Mathf.Ceil(timer).ToString();
+        // update counter
+        if (timerText != null)
+        {
+            timerText.text =
+                "Time: " + Mathf.Ceil(timer).ToString();
+        }
 
-        // explotar cuando llegue a 0
+        // burst
         if (timer <= 0)
         {
             Explode();
         }
     }
 
-    // pasar bomba a otro jugador
+    // pass bomb
     public void PassBomb(GameObject newHolder)
     {
         currentHolder = newHolder;
+
+        // sound launch
+        if (audioSource != null && throwSound != null)
+        {
+            audioSource.PlayOneShot(throwSound);
+        }
     }
 
+    // burst
     void Explode()
     {
-        Debug.Log("BOOM! perdió: " + currentHolder.name);
-        Destroy(gameObject);
+        exploded = true;
+
+        Debug.Log("BOOM! perdiÃ³: " + currentHolder.name);
+
+        // visual burst
+        if (explosionEffect != null)
+        {
+            // separate particles
+            explosionEffect.transform.parent = null;
+
+            // move explosion
+            explosionEffect.transform.position = transform.position;
+
+            // reproduce effect
+            explosionEffect.Play();
+
+            // destroy particles
+            Destroy(explosionEffect.gameObject, 3f);
+        }
+
+        // sound of explosion
+        if (audioSource != null && explosionSound != null)
+        {
+            audioSource.PlayOneShot(explosionSound);
+        }
+
+        // hide counter
+        if (timerText != null)
+        {
+            timerText.gameObject.SetActive(false);
+        }
+
+        // show GAME OVER
+        if (timeoutMessage != null)
+        {
+            timeoutMessage.SetActive(true);
+        }
+        // hide visual model of the pump
+        {
+            transform.localScale = Vector3.zero;
+        }
+        
+
+        // destroy bomb
+        Destroy(gameObject, 2f);
     }
 }
