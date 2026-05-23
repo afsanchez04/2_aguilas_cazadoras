@@ -160,6 +160,6 @@ public class Bomb : MonoBehaviour
         
 
         // destroy bomb
-        Destroy(gameObject, 2f);
+        //Destroy(gameObject, 2f);
     }
 }
