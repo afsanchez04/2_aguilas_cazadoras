@@ -94,12 +94,12 @@ public class Bomb : MonoBehaviour
     {
         currentHolder = newHolder;
 
-        // sound launch
-        if (audioSource != null && throwSound != null)
-        {
-            audioSource.PlayOneShot(throwSound);
-        }
+    // launch sound
+    if (audioSource != null && throwSound != null)
+    {
+        audioSource.PlayOneShot(throwSound);
     }
+}
 
     // burst
     void Explode()
