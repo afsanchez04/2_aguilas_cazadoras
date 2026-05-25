@@ -90,19 +90,16 @@ public class Bomb : MonoBehaviour
     }
 
     // pass bomb
-   public void PassBomb(GameObject newHolder)
-{
-    // stop passing after explosion
-    if (exploded) return;
-
-    currentHolder = newHolder;
-
-    // launch sound
-    if (audioSource != null && throwSound != null)
+    public void PassBomb(GameObject newHolder)
     {
-        audioSource.PlayOneShot(throwSound);
+        currentHolder = newHolder;
+
+        // sound launch
+        if (audioSource != null && throwSound != null)
+        {
+            audioSource.PlayOneShot(throwSound);
+        }
     }
-}
 
     // burst
     void Explode()
