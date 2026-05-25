@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Bomb : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Bomb : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI timerText;
     public GameObject timeoutMessage;
+
+    public TextMeshProUGUI loserText;
+    public GameObject restartText;
 
     [Header("Explosion")]
     public ParticleSystem explosionEffect;
@@ -33,12 +37,33 @@ public class Bomb : MonoBehaviour
         {
             timeoutMessage.SetActive(false);
         }
+
+        // hide loser text
+        if (loserText != null)
+        {
+            loserText.gameObject.SetActive(false);
+        }
+
+        // hide restart text
+        if (restartText != null)
+        {
+            restartText.SetActive(false);
+        }
     }
 
     void Update()
     {
-        // Stop update after exploding
-        if (exploded) return;
+        
+        // restart after exploding
+        if (exploded)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
+            return;
+        }
 
         // seguir al jugador
         if (currentHolder != null)
@@ -116,6 +141,18 @@ public class Bomb : MonoBehaviour
         {
             timeoutMessage.SetActive(true);
         }
+        // show loser name
+        if (loserText != null)
+        {
+            loserText.text = "Player Lost: " + currentHolder.name;
+            loserText.gameObject.SetActive(true);
+        }
+
+        // show restart message
+        if (restartText != null)
+        {
+            restartText.SetActive(true);
+        }
         // hide visual model of the pump
         {
             transform.localScale = Vector3.zero;
@@ -123,6 +160,6 @@ public class Bomb : MonoBehaviour
         
 
         // destroy bomb
-        Destroy(gameObject, 2f);
+        //Destroy(gameObject, 2f);
     }
 }
